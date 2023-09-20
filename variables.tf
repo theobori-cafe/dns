@@ -9,8 +9,8 @@ variable "subdomains" {
   default     = ["status", "cringe", "etherpad", "search"]
 }
 
-variable "target" {
+variable "host" {
   type        = string
-  description = "The target IP address"
+  description = "The target host IPv4 address"
   sensitive   = true
 }

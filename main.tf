@@ -34,21 +34,51 @@ resource "ovh_domain_zone" "zone" {
 resource "ovh_domain_zone_record" "domain" {
   zone      = var.domain
   fieldtype = "A"
-  ttl       = 3600
-  target    = var.target
-
+  target    = var.host
+  
   depends_on = [ ovh_domain_zone.zone ]
 }
 
+resource "ovh_domain_zone_record" "www_domain" {
+  zone      = "www.${var.domain}"
+  fieldtype = "A"
+  target    = var.host
+  
+  depends_on = [ ovh_domain_zone.zone ]
+}
 
-resource "ovh_domain_zone_record" "subdomains" {
+resource "ovh_domain_zone_record" "mail" {
+  zone      = "mail.${var.domain}"
+  fieldtype = "MX"
+  ttl       = 300
+  target    = var.host
+  
+  depends_on = [ ovh_domain_zone.zone ]
+}
+
+resource "ovh_domain_zone_record" "dmarc" {
+  zone      = "_dmarc.${var.domain}"
+  fieldtype = "TXT"
+  target    = "v=DMARC1; p=reject; rua=mailto:dmarc@${var.domain}; fo=1"
+  
+  depends_on = [ ovh_domain_zone.zone ]
+}
+
+resource "ovh_domain_zone_record" "allow_mx_domain" {
+  zone      = var.domain
+  fieldtype = "TXT"
+  target    = "v=spf1 mx a:mail.${var.domain} -all"
+  
+  depends_on = [ ovh_domain_zone.zone ]
+}
+
+resource "ovh_domain_zone_record" "subdomain_entries" {
   for_each = var.subdomains
 
   zone      = var.domain
   subdomain = each.key
   fieldtype = "A"
-  ttl       = 3600
-  target    = var.target
-
+  target    = var.host
+  
   depends_on = [ ovh_domain_zone.zone ]
 }
