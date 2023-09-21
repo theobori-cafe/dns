@@ -6,7 +6,7 @@ variable "domain" {
 variable "subdomains" {
   type        = set(string)
   description = "The subdomains directly link to `var.domain_name`"
-  default     = ["status", "cringe", "etherpad", "search", "mail"]
+  default     = ["status", "cringe", "etherpad", "search", "mail", "joplin"]
 }
 
 variable "host" {
