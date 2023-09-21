@@ -1,5 +1,7 @@
 # ☕ dns
 
+![validate](https://github.com/theobori-cafe/dns/actions/workflows/validate.yml/badge.svg)
+
 ## 📖 Build and run
 
 You only need the following requirements:
