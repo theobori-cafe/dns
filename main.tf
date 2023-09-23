@@ -15,7 +15,7 @@ resource "ovh_domain_zone_record" "mail" {
   zone      = var.domain
   fieldtype = "MX"
   ttl       = 300
-  target    = "10 mail.${var.domain}"
+  target    = "10 mail"
 }
 
 resource "ovh_domain_zone_record" "dmarc" {
@@ -37,6 +37,15 @@ resource "ovh_domain_zone_record" "www_txt" {
   target    = "1|www.${var.domain}"
 }
 
+resource "ovh_domain_zone_record" "dkim_key" {
+  count = var.dkim_key == null ? 0 : 1
+
+  zone      = var.domain
+  subdomain = "mail._domainkey"
+  fieldtype = "TXT"
+  target    = var.dkim_key
+}
+
 resource "ovh_domain_zone_record" "subdomain_entries" {
   for_each = var.subdomains
 
@@ -54,3 +63,4 @@ resource "ovh_domain_zone_record" "mail_ipv6" {
   fieldtype = "AAAA"
   target    = var.host_ipv6
 }
+

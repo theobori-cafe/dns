@@ -6,7 +6,16 @@ variable "domain" {
 variable "subdomains" {
   type        = set(string)
   description = "The subdomains directly link to `var.domain_name`"
-  default     = ["status", "cringe", "etherpad", "search", "mail", "joplin"]
+  default     = [
+    "status",
+    "cringe",
+    "etherpad",
+    "search", 
+    "mail",
+    "imap",
+    "smtp",
+    "joplin"
+  ]
 }
 
 variable "host" {
@@ -20,4 +29,11 @@ variable "host_ipv6" {
   description = "The target host IPv6 address"
   default     = null
   sensitive   = true
+}
+
+variable "dkim_key" {
+  type = string
+  description = "The TXT DNS entry containing the DKIM key"
+  default = null
+  sensitive = true
 }
