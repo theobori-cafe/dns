@@ -13,7 +13,7 @@ variable "subdomains" {
     "etherpad",
     "search",
     "mail",
-    "joplin"
+    "cloud"
   ]
 }
 
