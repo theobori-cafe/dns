@@ -15,7 +15,8 @@ variable "subdomains" {
     "mail",
     "cloud",
     "news",
-    "git"
+    "git",
+    "password"
   ]
 }
 
