@@ -18,7 +18,8 @@ variable "subdomains" {
     "git",
     "password",
     "services",
-    "bin"
+    "bin",
+    "books"
   ]
 }
 
