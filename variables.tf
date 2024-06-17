@@ -19,7 +19,9 @@ variable "subdomains" {
     "password",
     "services",
     "bin",
-    "books"
+    "books",
+    "links",
+    "translate",
   ]
 }
 
